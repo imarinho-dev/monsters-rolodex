@@ -2,6 +2,8 @@ import { Component } from "react";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 
+import { api } from "./services/api";
+
 class App extends Component {
 	constructor() {
 		super();
@@ -12,13 +14,25 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://jsonplaceholder.typicode.com/users")
-			.then((response) => response.json())
-			.then((users) => {
+		// fetch("http://jsonplaceholder.typicode.com/users")
+		// 	.then((response) => response.json())
+		// 	.then((users) => {
+		// 		this.setState(() => {
+		// 			return { monsters: users };
+		// 		});
+		// 	});
+
+		try {
+			// const response = api.get("/users");
+			// console.log(response);
+			api.get("/users").then((response) => {
 				this.setState(() => {
-					return { monsters: users };
+					return { monsters: response.data };
 				});
 			});
+		} catch (error) {
+			console.log("error");
+		}
 	}
 
 	onSearchChange = (event) => {
