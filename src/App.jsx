@@ -25,7 +25,7 @@ class App extends Component {
 		try {
 			// const response = api.get("/users");
 			// console.log(response);
-			api.get("/users").then((response) => {
+			api.get("/users/").then((response) => {
 				this.setState(() => {
 					return { monsters: response.data };
 				});
